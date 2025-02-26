@@ -1,0 +1,23 @@
+[
+  {
+    "title": "Portfolio Website",
+    "description": "A personal portfolio website built with Next.js and Tailwind CSS.",
+    "tech": ["Next.js", "React", "Tailwind CSS"],
+    "link": "https://abhijith.top",
+    "github": "https://github.com/yourgithub/portfolio"
+  },
+  {
+    "title": "E-Commerce Dashboard",
+    "description": "An admin dashboard for managing an e-commerce store.",
+    "tech": ["React", "Node.js", "MongoDB"],
+    "link": "https://ecommerce-demo.com",
+    "github": "https://github.com/yourgithub/ecommerce-dashboard"
+  },
+  {
+    "title": "Chat App",
+    "description": "A real-time chat application with WebSockets.",
+    "tech": ["Next.js", "Socket.io", "Firebase"],
+    "link": "https://chatapp-demo.com",
+    "github": "https://github.com/yourgithub/chat-app"
+  }
+]

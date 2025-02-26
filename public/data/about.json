@@ -1,0 +1,26 @@
+{
+  "bio": [
+    "I’m a Full-Stack Developer with a passion for building dynamic and scalable applications using JavaScript, React, and modern web technologies. I specialize in creating seamless user experiences by combining frontend performance with backend scalability. I thrive at the intersection of design and development, always striving to craft solutions that are not only functional but also elegant and efficient.",
+    "Currently, I’m working as a React Developer, where I focus on developing and maintaining high-performance applications while keeping an eye on the latest industry trends. I believe in continuous learning and constantly improving my skills to stay ahead in the fast-paced tech world.",
+    "Over the years, I’ve had the chance to work on various projects, from large-scale enterprise applications to smaller, more agile solutions, all while ensuring that both the user experience and backend architecture are top-notch. I enjoy solving complex challenges and exploring new technologies that push the boundaries of what’s possible.",
+    "When I’m not coding, I’m usually playing badminton, tinkering with my home server setup, or binge-watching shows and movies. I’m always looking for new ways to improve both my personal projects and my workflow, from automation to experimenting with innovative tech solutions.",
+    "Let’s connect and create something amazing together!"
+  ],
+  "skills": [
+    { "name": "HTML", "icon": "Html5Original" },
+    { "name": "CSS", "icon": "Css3Original" },
+    { "name": "Sass", "icon": "SassOriginal" },
+    { "name": "JavaScript", "icon": "JavascriptOriginal" },
+    { "name": "Next.js", "icon": "NextjsOriginal" },
+    { "name": "React", "icon": "ReactOriginal" },
+    { "name": "Angular", "icon": "AngularOriginal" },
+    { "name": "Figma", "icon": "FigmaOriginal" },
+    { "name": "Cypress", "icon": "CypressioOriginal" },
+    { "name": "Node.js", "icon": "NodejsOriginal" },
+    { "name": "Express", "icon": "ExpressOriginal" },
+    { "name": "MySQL", "icon": "MysqlOriginal" },
+    { "name": "MongoDB", "icon": "MongodbOriginal" },
+    { "name": "Git", "icon": "GitOriginal" },
+    { "name": "Docker", "icon": "DockerOriginal" }
+  ]
+}

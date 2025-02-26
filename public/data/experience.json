@@ -1,0 +1,46 @@
+[
+  {
+    "role": "Senior React Developer",
+    "company": "Relay 42",
+    "period": "02/2022 - Present",
+    "description": "Develop and maintain critical features for Relay 42's product, improving performance, scalability, and user experience. Migrate legacy components to modern technologies, collaborate with cross-functional teams to ensure seamless integration, and implement best practices in testing, accessibility, and Agile development. Drive improvements in code quality and efficiency while delivering impactful features that contribute to business growth.",
+    "skills": [
+      "React",
+      "Redux",
+      "Cypress",
+      "TypeScript",
+      "Jest",
+      "AngularJS",
+      "Sketch",
+      "Figma"
+    ],
+    "link": "https://www.relay42.com/"
+  },
+  {
+    "role": "Senior Full Stack Developer",
+    "company": "CodeFrontier Software Pvt Ltd",
+    "period": "12/2018 - 01/2022",
+    "description": "Started as a web developer creating web applications for a non-profit to manage energy-saving device rebates. Developed multiple applications using MySQL, Node.js, and Angular, enhancing both functionality and user experience. Led the development of 3+ MEAN stack applications, from inception to production, ensuring timely, high-quality delivery. Mentored new recruits, boosting team competency and integration. Improved web page load time by 75% through Redis caching, reducing load from 12 to 3 seconds. Utilized RabbitMQ for efficient communication between applications across servers, optimizing batch processes. Refactored code and optimized databases to enhance performance and scalability. Conducted code reviews and provided guidance to junior developers to maintain code quality and best practices.",
+    "skills": [
+      "Angular",
+      "Node",
+      "MySQL",
+      "Express",
+      "Python",
+      "PHP",
+      "Docker",
+      "OpenShift",
+      "Kubernetes",
+      "MongoDB"
+    ],
+    "link": "https://www.jillellagroup.com/"
+  },
+  {
+    "role": "Senior Java Developer",
+    "company": "LTIMindtree",
+    "period": "02/2016 - 12/2018",
+    "description": "Developed a client-facing web application for a leading American insurance company using Java Spring and Hibernate, improving customer satisfaction. Automated tasks and health checks, reducing manual effort and testing time by 40%, and accelerating the development cycle. Managed projects using the Waterfall model, ensuring 100% adherence to deadlines with comprehensive test cases. Mentored junior developers, reducing their onboarding time by 30%. Awarded for automating testing processes and exceeding performance expectations, improving team efficiency by 25%. Enhanced expertise in modern web development through an extensive Node.js and Angular course from Edureka.",
+    "skills": ["Spring", "Hibernate", "Spring Boot", "Angular", "JSP"],
+    "link": "https://www.ltimindtree.com/"
+  }
+]
