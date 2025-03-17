@@ -1,8 +1,6 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { useAPI } from "@/hooks";
-import { getAbout } from "@/services/dataService";
 import {
   AngularOriginal,
   Css3Original,
@@ -21,6 +19,7 @@ import {
   SassOriginal,
 } from "devicons-react";
 import { RxPerson } from "react-icons/rx";
+import { TAbout } from "@/types";
 
 const skillIcons = {
   Html5Original,
@@ -40,11 +39,7 @@ const skillIcons = {
   SassOriginal,
 };
 
-export default function About() {
-  const { data: about, isLoading } = useAPI(() => getAbout());
-
-  if (isLoading || !about) return <p>Loading...</p>;
-
+export default function About({ about }: { about: TAbout }) {
   const { bio, skills } = about;
 
   return (

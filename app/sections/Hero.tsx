@@ -1,13 +1,8 @@
 "use client";
 import { Socials } from "@/components";
-import { useAPI } from "@/hooks";
-import { getProfile } from "@/services";
+import { TProfile } from "@/types";
 
-export default function Hero() {
-  const { data: profile, isLoading } = useAPI(() => getProfile());
-
-  if (isLoading || !profile) return <p>Loading...</p>;
-
+export default function Hero({ profile }: { profile: TProfile }) {
   return (
     <section
       id="hero"

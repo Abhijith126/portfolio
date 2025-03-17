@@ -1,12 +1,12 @@
 "use client";
-import { useAPI } from "@/hooks";
-import { getExperience } from "@/services";
 
-export default function Experience() {
-  const { data: experiences, isLoading } = useAPI(() => getExperience());
+import { TExperience } from "@/types";
 
-  if (isLoading || !experiences) return <p>Loading...</p>;
-
+export default function Experience({
+  experiences,
+}: {
+  experiences: TExperience[];
+}) {
   return (
     <section
       id="experience"
