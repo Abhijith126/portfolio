@@ -3,7 +3,15 @@ import {
   getSocials,
   getAbout,
   getExperience,
+  getProjects,
   getContact,
 } from "./dataService";
 
-export { getProfile, getSocials, getAbout, getExperience, getContact };
+export {
+  getProfile,
+  getSocials,
+  getAbout,
+  getExperience,
+  getProjects,
+  getContact,
+};

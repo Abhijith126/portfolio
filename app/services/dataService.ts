@@ -1,5 +1,5 @@
 import { getData } from "@/services/ApiService";
-import { TAbout, TExperience, TProfile, TSocial } from "@/types";
+import { TAbout, TExperience, TProfile, TProject, TSocial } from "@/types";
 
 export const getProfile = (): Promise<TProfile> => {
   return getData("profile");
@@ -15,6 +15,10 @@ export const getAbout = (): Promise<TAbout> => {
 
 export const getExperience = (): Promise<TExperience[]> => {
   return getData("experience");
+};
+
+export const getProjects = (): Promise<TProject[]> => {
+  return getData("projects");
 };
 
 export const getContact = (): Promise<TSocial[]> => {

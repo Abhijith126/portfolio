@@ -13,17 +13,18 @@ const iconMap: { [key: string]: ReactElement } = {
 const Socials = () => {
   const { data: socials, isLoading } = useAPI(() => getSocials());
 
-  if (isLoading || !socials) return <>Loading..</>;
+  if (isLoading || !socials) return null;
 
   return (
-    <div className="flex space-x-4 mt-4 ">
+    <div className="flex items-center gap-5">
       {socials.map((social, index) => (
         <a
           key={index}
           href={social.url}
           target="_blank"
           rel="noopener noreferrer"
-          className="text-gray-400 text-2xl hover:text-gray-100 transition"
+          className="text-cream-muted text-xl hover:text-brass transition-colors duration-300"
+          aria-label={social.name}
         >
           {iconMap[social.icon] || null}
         </a>

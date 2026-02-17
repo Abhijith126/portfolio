@@ -8,6 +8,7 @@ export type TProject = {
 
 export type TProfile = {
   name: string;
+  fullName?: string;
   role: string;
   location: string;
   email: string;

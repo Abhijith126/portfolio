@@ -2,10 +2,15 @@
 
 export default function Footer() {
   return (
-    <div className="bg-gray-800 flex justify-center items-center py-4 text-white">
-      <p className="uppercase text-xs font-medium">
-        Abhijith Prabhakar &copy; {new Date().getFullYear()}
-      </p>
-    </div>
+    <footer className="border-t border-ink-border">
+      <div className="max-w-7xl mx-auto px-6 md:px-12 py-8 flex flex-col md:flex-row justify-between items-center gap-4">
+        <p className="text-cream-faint text-xs tracking-[0.2em] uppercase font-body">
+          &copy; {new Date().getFullYear()} Abhijith Prabhakar
+        </p>
+        <p className="text-cream-faint text-xs tracking-wide font-body">
+          Designed &amp; built with intention
+        </p>
+      </div>
+    </footer>
   );
 }
