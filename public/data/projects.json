@@ -5,5 +5,19 @@
     "tech": ["Next.js", "React", "Tailwind CSS", "Framer Motion"],
     "link": "https://abhijith.top",
     "github": "https://github.com/Abhijith126/portfolio"
+  },
+  {
+    "title": "Sound sniff",
+    "description": "SoundSniff Music Explorer is a modern music exploration web app built with React, Redux, and Vite. It provides an interface to explore music data with features such as multi-language support, API calls, and testing setups.",
+    "tech": ["React", "Material UI", "Responsive Design", "Redux", "Vite"],
+    "link": "https://abhijith126.github.io/sound-sniff",
+    "github": "https://github.com/Abhijith126/sound-sniff"
+  },
+  {
+    "title": "Resume Builder",
+    "description": "A responsive resume builder web app built with React and TypeScript. Features a clean UI, drag-and-drop functionality, and export options for PDF and DOCX formats.",
+    "tech": ["React", "TypeScript", "Tailwind CSS", "Drag-and-Drop"],
+    "link": "https://abhijith126.github.io/resume-builder",
+    "github": "https://github.com/Abhijith126/resume-builder"
   }
 ]
