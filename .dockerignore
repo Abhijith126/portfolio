@@ -7,5 +7,6 @@ dist
 release
 *.tar
 *.tar.gz
+*.zip
 .env*
 npm-debug.log*

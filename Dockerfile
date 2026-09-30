@@ -11,6 +11,11 @@ COPY --from=dependencies /app/node_modules ./node_modules
 COPY . .
 RUN npm run build
 
+FROM scratch AS build-files
+COPY --from=builder /app/.next/standalone /
+COPY --from=builder /app/.next/static /.next/static
+COPY --from=builder /app/public /public
+
 FROM node:22-alpine AS runner
 WORKDIR /app
 ENV NODE_ENV=production \

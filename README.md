@@ -1,15 +1,15 @@
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
-## Container releases
+## Build releases
 
-Push a version tag such as `v1.0.0` to build and publish a downloadable container
-deployment archive in GitHub Releases. Download it on your server, load the image
-with `docker load`, and start it with the included Docker Compose file. The default
-host port is `5172`, and the image targets Linux x86-64.
+Every push or merged pull request to `main` automatically compiles the app and
+publishes `portfolio-build.zip` with a checksum in GitHub Releases. The ZIP contains
+the production Next.js standalone build and runtime dependencies for Node.js 22
+Alpine on Linux x86-64.
 
-See [DEPLOYMENT.md](./DEPLOYMENT.md) for the release, deployment, upgrade, and
-rollback commands. Pushes to `main` and pull requests also build and smoke-test
-the container without publishing a release.
+Docker Compose is kept separately on the deployment server. It downloads the
+release ZIP and runs the app; no application build is needed on the server.
+See [DEPLOYMENT.md](./DEPLOYMENT.md) for release and deployment details.
 
 ## Getting Started
 
