@@ -46,7 +46,7 @@ jobs:
               cd /app
               exec su-exec node node server.js
             '
-          curl --fail --silent --show-error --retry 30 --retry-connrefused --retry-delay 2 \
+          curl --fail --silent --show-error --retry 30 --retry-all-errors --retry-delay 2 --max-time 5 \
             http://127.0.0.1:5172/ -o release/page.html
           curl --fail --silent --show-error http://127.0.0.1:5172/data/profile.json | python3 -m json.tool > /dev/null
           curl --fail --silent --show-error http://127.0.0.1:5172/data/projects.json | python3 -m json.tool > /dev/null
