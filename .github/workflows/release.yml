@@ -1,0 +1,115 @@
+name: Build and release container
+
+on:
+  push:
+    branches: [main]
+    tags: ["v*"]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: portfolio-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    outputs:
+      version: ${{ steps.version.outputs.version }}
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+      - name: Select image version
+        id: version
+        env:
+          REF_TYPE: ${{ github.ref_type }}
+          REF_NAME: ${{ github.ref_name }}
+        run: |
+          if [[ "$REF_TYPE" == "tag" ]]; then
+            VERSION="$REF_NAME"
+          else
+            VERSION="build-${GITHUB_SHA:0:12}"
+          fi
+          if [[ ! "$VERSION" =~ ^[a-zA-Z0-9_][a-zA-Z0-9_.-]{0,127}$ ]]; then
+            echo "Release tags must be valid Docker image tags (for example v1.0.0)." >&2
+            exit 1
+          fi
+          echo "version=$VERSION" >> "$GITHUB_OUTPUT"
+          mkdir -p release/bundle
+          cp docker-compose.yml release/bundle/
+          cp DEPLOYMENT.md release/bundle/
+          printf 'PORTFOLIO_VERSION=%s\nPORTFOLIO_PORT=5172\n' "$VERSION" > release/bundle/.env
+      - uses: docker/setup-buildx-action@8d2750c68a42422c14e847fe6c8ac0403b4cbd6f # v3
+      - name: Build production image
+        uses: docker/build-push-action@10e90e3645eae34f1e60eeb005ba3a3d33f178e8 # v6
+        with:
+          context: .
+          platforms: linux/amd64
+          load: true
+          tags: portfolio:${{ steps.version.outputs.version }}
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+      - name: Check Compose and container
+        run: |
+          docker compose --project-directory release/bundle config --quiet
+          # Bind the smoke-test service to the runner's loopback interface.
+          PORTFOLIO_PORT=127.0.0.1:5172 docker compose --project-directory release/bundle up -d --wait --wait-timeout 90
+          curl --fail --silent --show-error http://127.0.0.1:5172/ -o release/page.html
+          curl --fail --silent --show-error http://127.0.0.1:5172/data/profile.json | python3 -m json.tool > /dev/null
+          curl --fail --silent --show-error http://127.0.0.1:5172/data/projects.json | python3 -m json.tool > /dev/null
+          ASSET=$(python3 -c 'import re; print(re.search(r"src=\"([^\"]*/_next/static/[^\"]+\.js)\"", open("release/page.html").read())[1])')
+          curl --fail --silent --show-error "http://127.0.0.1:5172$ASSET" -o /dev/null
+      - name: Show container logs
+        if: failure()
+        run: docker compose --project-directory release/bundle logs --no-color
+      - name: Stop container
+        if: always()
+        run: docker compose --project-directory release/bundle down
+      - name: Package downloadable deployment
+        env:
+          VERSION: ${{ steps.version.outputs.version }}
+        run: |
+          docker save "portfolio:$VERSION" -o release/bundle/image.tar
+          (cd release/bundle && sha256sum image.tar docker-compose.yml .env DEPLOYMENT.md > SHA256SUMS)
+          ARCHIVE="portfolio-$VERSION-linux-amd64.tar.gz"
+          tar -czf "release/$ARCHIVE" -C release/bundle .
+          (cd release && sha256sum "$ARCHIVE" > "$ARCHIVE.sha256")
+      - name: Store deployment artifact
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: portfolio-${{ steps.version.outputs.version }}-linux-amd64
+          path: |
+            release/*.tar.gz
+            release/*.sha256
+          if-no-files-found: error
+          retention-days: 14
+
+  release:
+    if: startsWith(github.ref, 'refs/tags/v')
+    needs: build
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/download-artifact@d3f86a106a0bac45b974a628896c90dbdf5c8093 # v4
+        with:
+          name: portfolio-${{ needs.build.outputs.version }}-linux-amd64
+          path: release
+      - name: Publish release assets
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GH_REPO: ${{ github.repository }}
+          VERSION: ${{ needs.build.outputs.version }}
+        run: |
+          ARCHIVE="portfolio-$VERSION-linux-amd64.tar.gz"
+          if ! gh release view "$VERSION" > /dev/null 2>&1; then
+            gh release create "$VERSION" --verify-tag --draft --title "$VERSION" \
+              --notes "Ready-built Linux x86-64 container. Download the deployment archive and checksum, extract it, then follow DEPLOYMENT.md. Includes Docker image, Compose file, and version configuration."
+          fi
+          gh release upload "$VERSION" "release/$ARCHIVE" "release/$ARCHIVE.sha256" --clobber
+          gh release edit "$VERSION" --draft=false

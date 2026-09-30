@@ -1,5 +1,16 @@
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
+## Container releases
+
+Push a version tag such as `v1.0.0` to build and publish a downloadable container
+deployment archive in GitHub Releases. Download it on your server, load the image
+with `docker load`, and start it with the included Docker Compose file. The default
+host port is `5172`, and the image targets Linux x86-64.
+
+See [DEPLOYMENT.md](./DEPLOYMENT.md) for the release, deployment, upgrade, and
+rollback commands. Pushes to `main` and pull requests also build and smoke-test
+the container without publishing a release.
+
 ## Getting Started
 
 First, run the development server:
